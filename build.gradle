@@ -72,5 +72,6 @@ javadoc {
 }
 
 dependencies {
+    implementation 'org.knowm.xchart:xchart:3.8.0'
     testImplementation 'junit:junit:4.12'
 }
