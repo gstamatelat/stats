@@ -180,6 +180,42 @@ public class Distribution {
     }
 
     /**
+     * Returns the tail of the distribution that is formed by values greater than {@code value}.
+     * <p>
+     * More formally, returns a new distribution with values strictly greater than {@code value}.
+     *
+     * @param value the value dictating the tail of the distribution
+     * @return the tail of the distribution that is formed by values greater than {@code value}
+     */
+    public Distribution tail(double value) {
+        final Distribution dd = new Distribution();
+        for (Map.Entry<Double, Long> e : dist.entrySet()) {
+            if (e.getKey() > value) {
+                dd.dist.put(e.getKey(), e.getValue());
+            }
+        }
+        return dd;
+    }
+
+    /**
+     * Returns the head of the distribution that is formed by values smaller than {@code value}.
+     * <p>
+     * More formally, returns a new distribution with values strictly smaller than {@code value}.
+     *
+     * @param value the value dictating the head of the distribution
+     * @return the head of the distribution that is formed by values smaller than {@code value}
+     */
+    public Distribution head(double value) {
+        final Distribution dd = new Distribution();
+        for (Map.Entry<Double, Long> e : dist.entrySet()) {
+            if (e.getKey() < value) {
+                dd.dist.put(e.getKey(), e.getValue());
+            }
+        }
+        return dd;
+    }
+
+    /**
      * Represents the binning space.
      */
     public enum Space {
