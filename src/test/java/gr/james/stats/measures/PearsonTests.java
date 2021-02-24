@@ -1,6 +1,5 @@
-package gr.james.stats;
+package gr.james.stats.measures;
 
-import gr.james.stats.measures.Pearson;
 import org.junit.Assert;
 import org.junit.Test;
 

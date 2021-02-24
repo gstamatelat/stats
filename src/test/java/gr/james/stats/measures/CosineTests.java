@@ -1,6 +1,5 @@
-package gr.james.stats;
+package gr.james.stats.measures;
 
-import gr.james.stats.measures.Cosine;
 import org.junit.Assert;
 import org.junit.Test;
 
