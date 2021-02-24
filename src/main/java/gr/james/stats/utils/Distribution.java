@@ -1,4 +1,4 @@
-package gr.james.stats;
+package gr.james.stats.utils;
 
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;

@@ -1,5 +1,6 @@
 package gr.james.stats;
 
+import gr.james.stats.measures.Jaccard;
 import org.junit.Assert;
 import org.junit.Test;
 

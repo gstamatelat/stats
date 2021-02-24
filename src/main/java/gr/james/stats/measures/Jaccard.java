@@ -1,15 +1,15 @@
-package gr.james.stats;
+package gr.james.stats.measures;
 
 import java.util.Set;
 
 /**
- * Overlap coefficient implementation.
+ * Jaccard index implementation.
  */
-public class Overlap {
+public class Jaccard {
     private final double value;
 
     /**
-     * Create a new {@link Overlap} from the given sets.
+     * Create a new {@link Jaccard} from the given sets.
      *
      * @param a   one set
      * @param b   the other set
@@ -17,7 +17,7 @@ public class Overlap {
      * @throws NullPointerException     if either {@code a} or {@code b} is {@code null}
      * @throws IllegalArgumentException if either {@code a} or {@code b} is empty
      */
-    public <T> Overlap(Set<T> a, Set<T> b) {
+    public <T> Jaccard(Set<T> a, Set<T> b) {
         if (a.isEmpty() || b.isEmpty()) {
             throw new IllegalArgumentException("Inputs cannot be empty");
         }
@@ -31,19 +31,22 @@ public class Overlap {
             small = a;
         }
         int intersection = 0;
+        int union = big.size();
         for (T t : small) {
             if (big.contains(t)) {
                 intersection++;
+            } else {
+                union++;
             }
         }
-        this.value = (double) intersection / (double) small.size();
+        this.value = (double) intersection / (double) union;
         assert this.value >= 0 && this.value <= 1;
     }
 
     /**
-     * Returns the Overlap coefficient of the two sets that this instance was created from.
+     * Returns the Jaccard index of the two sets that this instance was created from.
      *
-     * @return the Overlap coefficient of the two sets that this instance was created from
+     * @return the Jaccard index of the two sets that this instance was created from
      */
     public double value() {
         return this.value;

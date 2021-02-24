@@ -1,4 +1,4 @@
-package gr.james.stats;
+package gr.james.stats.measures;
 
 import java.util.HashMap;
 import java.util.List;

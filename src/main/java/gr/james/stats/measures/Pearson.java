@@ -1,4 +1,4 @@
-package gr.james.stats;
+package gr.james.stats.measures;
 
 import java.util.Iterator;
 import java.util.Set;
