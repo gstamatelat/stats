@@ -99,6 +99,7 @@ public class Distribution {
         for (Map.Entry<Double, Long> e : dist.entrySet()) {
             if (e.getValue() > maxFrequency) {
                 maxValue = e.getKey();
+                maxFrequency = e.getValue();
             }
         }
         return maxValue;
