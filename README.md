@@ -3,7 +3,6 @@
 A collection of statistical measures and utilities in Java 8.
 
 Set theoretic measures:
-
 - Jaccard index
 - Mutual information
 - Overlap coefficient
@@ -11,12 +10,18 @@ Set theoretic measures:
 - Sorensen-Dice coefficient
 
 Rank correlation measures:
+
 - Kendall rank correlation coefficient
 - Spearman's rank correlation coefficient
 
 Quantity correlation measures:
+
 - Cosine similarity
 - Pearson correlation coefficient
+
+Other utilities:
+
+- Distribution
 
 ## Using
 
