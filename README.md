@@ -1,6 +1,6 @@
-# Measures
+# Stats
 
-A collection of various distance/similarity, set theoretic and statistical measures in Java 8.
+A collection of statistical measures and utilities in Java 8.
 
 Set theoretic measures:
 
@@ -27,14 +27,14 @@ Using Maven
 ```xml
 <dependency>
   <groupId>gr.james</groupId>
-  <artifactId>measures</artifactId>
-  <version>0.3</version>
+  <artifactId>stats</artifactId>
+  <version>0.1</version>
 </dependency>
 ```
 
 Using Gradle
 
 ```gradle
-implementation 'gr.james:measures:0.3' // Runtime
-api            'gr.james:measures:0.3' // Public API
+implementation 'gr.james:stats:0.1' // Runtime
+api            'gr.james:stats:0.1' // Public API
 ```

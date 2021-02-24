@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'gr.james'
-version '0.3'
+version '0.1'
 
 sourceCompatibility = 1.8
 
@@ -28,9 +28,9 @@ publishing {
         mavenJava(MavenPublication) {
             from components.java
             pom {
-                name = 'Measures'
-                description = 'A collection of various distance/similarity, set theoretic and statistical measures in Java 8'
-                url = 'https://github.com/gstamatelat/measures'
+                name = 'Stats'
+                description = 'A collection of statistical measures and utilities in Java 8'
+                url = 'https://github.com/gstamatelat/stats'
                 licenses {
                     license {
                         name = 'The MIT License'
@@ -45,9 +45,9 @@ publishing {
                     }
                 }
                 scm {
-                    connection = 'scm:git:https://github.com/gstamatelat/measures.git'
-                    developerConnection = 'scm:git:git@github.com:gstamatelat/measures.git'
-                    url = 'https://github.com/gstamatelat/measures'
+                    connection = 'scm:git:https://github.com/gstamatelat/stats.git'
+                    developerConnection = 'scm:git:git@github.com:gstamatelat/stats.git'
+                    url = 'https://github.com/gstamatelat/stats'
                 }
             }
         }
