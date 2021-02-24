@@ -39,6 +39,32 @@ public class Distribution {
 
     /**
      * Show the log-log plot of the distribution.
+     * <p>
+     * The {@code scaling} parameter determines the sum of the probabilities. Typically a value of {@code 1.0} is used.
+     *
+     * @param title  the title of the plot
+     * @param xLabel the label of the x axis
+     * @param yLabel the label of the y axis
+     * @param scale  the scaling parameter
+     */
+    public void showLogLog(String title, String xLabel, String yLabel, double scale) {
+        final double sum = frequencySum();
+        final List<Double> xData = new ArrayList<>(dist.keySet());
+        final List<Double> yData = dist.values().stream().map(y -> scale * y / sum).collect(Collectors.toList());
+        final XYChart chart = new XYChartBuilder().title(title).xAxisTitle(xLabel).yAxisTitle(yLabel).build();
+        chart.addSeries(title, xData, yData).setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);
+        chart.getStyler().setLegendVisible(false);
+        chart.getStyler().setXAxisLogarithmic(true).setYAxisLogarithmic(true);
+        new SwingWrapper<>(chart).displayChart();
+    }
+
+    /**
+     * Show the log-log plot of the distribution.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * showLogLog(title, xLabel, yLabel, 1.0);
+     * </code></pre>
      *
      * @param title  the title of the plot
      * @param xLabel the label of the x axis
@@ -57,6 +83,31 @@ public class Distribution {
 
     /**
      * Show the linear plot of the distribution.
+     * <p>
+     * The {@code scaling} parameter determines the sum of the probabilities. Typically a value of {@code 1.0} is used.
+     *
+     * @param title  the title of the plot
+     * @param xLabel the label of the x axis
+     * @param yLabel the label of the y axis
+     * @param scale  the scaling parameter
+     */
+    public void showLinear(String title, String xLabel, String yLabel, double scale) {
+        final double sum = frequencySum();
+        final List<Double> xData = new ArrayList<>(dist.keySet());
+        final List<Double> yData = dist.values().stream().map(y -> scale * y / sum).collect(Collectors.toList());
+        final XYChart chart = new XYChartBuilder().title(title).xAxisTitle(xLabel).yAxisTitle(yLabel).build();
+        chart.addSeries(title, xData, yData).setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);
+        chart.getStyler().setLegendVisible(false);
+        new SwingWrapper<>(chart).displayChart();
+    }
+
+    /**
+     * Show the linear plot of the distribution.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * showLinear(title, xLabel, yLabel, 1.0);
+     * </code></pre>
      *
      * @param title  the title of the plot
      * @param xLabel the label of the x axis
@@ -107,12 +158,28 @@ public class Distribution {
 
     /**
      * Output the distribution in stdout as comma separated x,y values.
+     * <p>
+     * The {@code scaling} parameter determines the sum of the probabilities. Typically a value of {@code 1.0} is used.
+     *
+     * @param scaling the scaling parameter
      */
-    public void print() {
+    public void print(double scaling) {
         final double sum = (double) frequencySum();
         for (Map.Entry<Double, Long> e : dist.entrySet()) {
-            System.out.printf("%f,%f%n", e.getKey(), e.getValue() / sum);
+            System.out.printf("%f,%f%n", e.getKey(), scaling * e.getValue() / sum);
         }
+    }
+
+    /**
+     * Output the distribution in stdout as comma separated x,y values.
+     * <p>
+     * This method is equivalent to
+     * <pre><code>
+     * print(1.0);
+     * </code></pre>
+     */
+    public void print() {
+        print(1.0);
     }
 
     /**
