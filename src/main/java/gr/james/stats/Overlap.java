@@ -1,15 +1,15 @@
-package gr.james.measures;
+package gr.james.stats;
 
 import java.util.Set;
 
 /**
- * Sorensen-Dice coefficient implementation.
+ * Overlap coefficient implementation.
  */
-public class Sorensen {
+public class Overlap {
     private final double value;
 
     /**
-     * Create a new {@link Sorensen} from the given sets.
+     * Create a new {@link Overlap} from the given sets.
      *
      * @param a   one set
      * @param b   the other set
@@ -17,7 +17,7 @@ public class Sorensen {
      * @throws NullPointerException     if either {@code a} or {@code b} is {@code null}
      * @throws IllegalArgumentException if either {@code a} or {@code b} is empty
      */
-    public <T> Sorensen(Set<T> a, Set<T> b) {
+    public <T> Overlap(Set<T> a, Set<T> b) {
         if (a.isEmpty() || b.isEmpty()) {
             throw new IllegalArgumentException("Inputs cannot be empty");
         }
@@ -36,14 +36,14 @@ public class Sorensen {
                 intersection++;
             }
         }
-        this.value = (double) intersection * 2.0 / (double) (small.size() + big.size());
+        this.value = (double) intersection / (double) small.size();
         assert this.value >= 0 && this.value <= 1;
     }
 
     /**
-     * Returns the Sorensen-Dice coefficient of the two sets that this instance was created from.
+     * Returns the Overlap coefficient of the two sets that this instance was created from.
      *
-     * @return the Sorensen-Dice coefficient of the two sets that this instance was created from
+     * @return the Overlap coefficient of the two sets that this instance was created from
      */
     public double value() {
         return this.value;
