@@ -39,6 +39,10 @@ public class Distribution {
 
     /**
      * Show the log-log plot of the distribution.
+     *
+     * @param title  the title of the plot
+     * @param xLabel the label of the x axis
+     * @param yLabel the label of the y axis
      */
     public void showLogLog(String title, String xLabel, String yLabel) {
         final double sum = frequencySum();
@@ -53,6 +57,10 @@ public class Distribution {
 
     /**
      * Show the linear plot of the distribution.
+     *
+     * @param title  the title of the plot
+     * @param xLabel the label of the x axis
+     * @param yLabel the label of the y axis
      */
     public void showLinear(String title, String xLabel, String yLabel) {
         final double sum = frequencySum();
