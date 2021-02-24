@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class DistributionTests {
     /**
-     * Test the mode
+     * Test the mode.
      */
     @Test
     public void modeTest() {
