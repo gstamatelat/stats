@@ -1,5 +1,5 @@
 /**
- * The main package comprising the implementation of the utilities.
+ * The package comprising the implementation of the utilities.
  * <p>
  * Set theoretic measures:
  * <ul>
