@@ -1,5 +1,5 @@
 /**
- * The main package comprising the implementation of the measures.
+ * The main package comprising the implementation of the utilities.
  * <p>
  * Set theoretic measures:
  * <ul>
@@ -18,6 +18,10 @@
  * <ul>
  *     <li>{@link gr.james.stats.Cosine Cosine similarity}</li>
  *     <li>{@link gr.james.stats.Pearson Pearson correlation coefficient}</li>
+ * </ul>
+ * Other:
+ * <ul>
+ *     <li>{@link gr.james.stats.Distribution Distribution}</li>
  * </ul>
  */
 package gr.james.stats;
