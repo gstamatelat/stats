@@ -4,8 +4,11 @@ import java.util.Objects;
 
 /**
  * Represents the result of a data binning.
+ *
+ * @param <X> the type of elements representing the range of this data bin
+ * @param <Y> the type of value
  */
-public class DataBin<X, Y> {
+public class DataBin<X extends Number, Y> {
     /**
      * The value of this data bin, typically frequency or probability.
      */
@@ -32,5 +35,14 @@ public class DataBin<X, Y> {
         this.value = Objects.requireNonNull(value);
         this.left = Objects.requireNonNull(left);
         this.right = Objects.requireNonNull(right);
+    }
+
+    /**
+     * Returns the center of this data bin, which is the average of {@link #left} and {@link #right}.
+     *
+     * @return the center of this data bin, which is the average of {@link #left} and {@link #right}
+     */
+    public double center() {
+        return (left.doubleValue() + right.doubleValue()) / 2;
     }
 }

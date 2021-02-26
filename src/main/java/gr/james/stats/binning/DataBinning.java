@@ -13,5 +13,5 @@ public interface DataBinning {
      * @param frequency the input data as a frequency map
      * @return a list of {@link DataBin data bins}
      */
-    List<DataBin<Double, Long>> bin(SortedMap<? extends Number, Long> frequency);
+    List<DataBin<Double, Double>> bin(SortedMap<? extends Number, ? extends Number> frequency);
 }

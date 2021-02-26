@@ -38,17 +38,17 @@ public class LogarithmicDataBinning implements DataBinning {
      * @throws IllegalArgumentException if {@code frequency} contains non-positive values
      */
     @Override
-    public List<DataBin<Double, Long>> bin(SortedMap<? extends Number, Long> frequency) {
+    public List<DataBin<Double, Double>> bin(SortedMap<? extends Number, ? extends Number> frequency) {
         if (frequency.size() < 2) {
             throw new IllegalArgumentException("data must contain at least two distinct values");
         }
 
-        final List<DataBin<Double, Long>> binsList = new ArrayList<>();
+        final List<DataBin<Double, Double>> binsList = new ArrayList<>();
 
         final double minKey = frequency.firstKey().doubleValue();
         final double maxKey = frequency.lastKey().doubleValue();
 
-        final long[] groups = new long[bins];
+        final double[] groups = new double[bins];
         final double[] limits = new double[bins + 1];
 
         if (minKey <= 0) {
@@ -61,18 +61,16 @@ public class LogarithmicDataBinning implements DataBinning {
         }
 
         int currentBin = 0;
-        for (Map.Entry<? extends Number, Long> e : frequency.entrySet()) {
+        for (Map.Entry<? extends Number, ? extends Number> e : frequency.entrySet()) {
             while (e.getKey().doubleValue() > limits[currentBin] && currentBin < bins - 1) {
                 currentBin++;
             }
-            groups[currentBin] += e.getValue();
+            groups[currentBin] += e.getValue().doubleValue();
         }
 
         for (int i = 0; i < groups.length; i++) {
             binsList.add(new DataBin<>(groups[i], limits[i], limits[i + 1]));
         }
-
-        assert frequency.values().stream().mapToLong(i -> i).sum() == Arrays.stream(groups).sum();
 
         return Collections.unmodifiableList(binsList);
     }
