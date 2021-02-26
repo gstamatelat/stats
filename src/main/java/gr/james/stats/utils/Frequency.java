@@ -6,32 +6,57 @@ import gr.james.stats.binning.DataBinning;
 import java.util.*;
 
 /**
- * Represents a distribution of double values into decimal frequencies.
+ * Represents a distribution of double values into integer frequencies.
  */
-public class Distribution {
-    private final TreeMap<Double, Double> dist;
+public class Frequency {
+    private final TreeMap<Double, Long> dist = new TreeMap<>();
 
     /**
-     * Construct a new empty {@link Distribution}.
+     * Construct a new empty {@link Frequency}.
      */
-    public Distribution() {
-        this.dist = new TreeMap<>();
+    public Frequency() {
+    }
+
+    @Deprecated
+    public static void main(String[] args) {
+        final Frequency d = new Frequency();
+        for (int i = 1; i < 100; i++) {
+            final long frequency = (long) (10000 * Math.pow(i, -2));
+            for (long f = 0; f < frequency; f++) {
+                d.add(i);
+            }
+        }
+        Plotting.logLog(d.toDistribution(), "LogLog", "X", "Y");
+        Plotting.logLogBins(d.toDistribution(), 25, "LogLogBins", "X", "Y");
+        Plotting.linear(d.toDistribution(), "Linear", "X", "Y");
+        Plotting.linearBins(d.toDistribution(), 25, "LinearBins", "X", "Y");
     }
 
     /**
-     * Associate a frequency with a value.
+     * Convert this {@link Frequency} into a {@link Distribution}.
      *
-     * @param value     the value
-     * @param frequency the frequency
+     * @return a new {@link Distribution} from this {@link Frequency}
      */
-    public void put(double value, double frequency) {
-        if (!Double.isFinite(value)) {
-            throw new IllegalArgumentException("value must be finite");
+    public Distribution toDistribution() {
+        final Distribution d = new Distribution();
+        for (Map.Entry<Double, Long> e : dist.entrySet()) {
+            d.put(e.getKey(), (double) e.getValue());
         }
-        if (!Double.isFinite(frequency)) {
-            throw new IllegalArgumentException("frequency must be finite");
+        return d;
+    }
+
+    /**
+     * Add a single observation.
+     * <p>
+     * If the value exists, its frequency will be increased by 1.
+     *
+     * @param t the observation value
+     */
+    public void add(double t) {
+        if (!Double.isFinite(t)) {
+            throw new IllegalArgumentException("argument must be finite");
         }
-        this.dist.put(value, frequency);
+        dist.merge(t, 1L, Long::sum);
     }
 
     /**
@@ -39,7 +64,7 @@ public class Distribution {
      *
      * @return a read-only view of the underlying frequency map of this distribution
      */
-    public SortedMap<Double, Double> map() {
+    public SortedMap<Double, Long> map() {
         return Collections.unmodifiableNavigableMap(dist);
     }
 
@@ -48,9 +73,9 @@ public class Distribution {
      *
      * @return the sum of all frequencies in the distribution
      */
-    public double sum() {
-        double sum = 0;
-        for (double v : dist.values()) {
+    public long sum() {
+        long sum = 0;
+        for (long v : dist.values()) {
             sum += v;
         }
         return sum;
@@ -65,9 +90,9 @@ public class Distribution {
      * @throws java.util.NoSuchElementException if this distribution is empty
      */
     public double mode() {
-        double maxFrequency = 0;
+        long maxFrequency = 0;
         double maxValue = dist.firstKey();
-        for (Map.Entry<Double, Double> e : dist.entrySet()) {
+        for (Map.Entry<Double, Long> e : dist.entrySet()) {
             if (e.getValue() > maxFrequency) {
                 maxValue = e.getKey();
                 maxFrequency = e.getValue();
@@ -80,8 +105,8 @@ public class Distribution {
      * Output the distribution in stdout as comma separated x,y values.
      */
     public void print() {
-        for (Map.Entry<Double, Double> e : dist.entrySet()) {
-            System.out.printf("%f,%f%n", e.getKey(), e.getValue());
+        for (Map.Entry<Double, Long> e : dist.entrySet()) {
+            System.out.printf("%f,%d%n", e.getKey(), e.getValue());
         }
     }
 
@@ -108,9 +133,9 @@ public class Distribution {
      * @param value the value dictating the tail of the distribution
      * @return the tail of the distribution that is formed by values greater than {@code value}
      */
-    public Distribution tail(double value) {
-        final Distribution dd = new Distribution();
-        for (Map.Entry<Double, Double> e : dist.entrySet()) {
+    public Frequency tail(double value) {
+        final Frequency dd = new Frequency();
+        for (Map.Entry<Double, Long> e : dist.entrySet()) {
             if (e.getKey() > value) {
                 dd.dist.put(e.getKey(), e.getValue());
             }
@@ -126,9 +151,9 @@ public class Distribution {
      * @param value the value dictating the head of the distribution
      * @return the head of the distribution that is formed by values smaller than {@code value}
      */
-    public Distribution head(double value) {
-        final Distribution dd = new Distribution();
-        for (Map.Entry<Double, Double> e : dist.entrySet()) {
+    public Frequency head(double value) {
+        final Frequency dd = new Frequency();
+        for (Map.Entry<Double, Long> e : dist.entrySet()) {
             if (e.getKey() < value) {
                 dd.dist.put(e.getKey(), e.getValue());
             }
