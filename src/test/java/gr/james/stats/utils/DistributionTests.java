@@ -28,8 +28,11 @@ public class DistributionTests {
         final Random r = new Random(12345L);
         final Distribution d = new Distribution();
         for (int i = 0; i < 1000; i++) {
-            d.add(r.nextInt(20));
+            d.add(r.nextInt(20) + 1);
         }
         d.bin(r.nextInt(20) + 5, Distribution.Space.Linear);
+        d.bin(r.nextInt(20) + 5, Distribution.Space.Ln);
+        d.bin(r.nextInt(20) + 5, Distribution.Space.Log2);
+        d.bin(r.nextInt(20) + 5, Distribution.Space.Log10);
     }
 }
