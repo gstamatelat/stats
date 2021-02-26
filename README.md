@@ -38,14 +38,14 @@ Using Maven
 ```xml
 <dependency>
   <groupId>gr.james</groupId>
-  <artifactId>stats</artifactId>
-  <version>0.4</version>
+    <artifactId>stats</artifactId>
+    <version>0.5</version>
 </dependency>
 ```
 
 Using Gradle
 
 ```gradle
-implementation 'gr.james:stats:0.4' // Runtime
-api            'gr.james:stats:0.4' // Public API
+implementation 'gr.james:stats:0.5' // Runtime
+api            'gr.james:stats:0.5' // Public API
 ```
