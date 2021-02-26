@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Logarithmic binning of data.
  */
-public final class LogarithmicDataBinning implements DataBinning {
+public class LogarithmicDataBinning implements DataBinning {
     private final int bins;
     private final double base;
 
