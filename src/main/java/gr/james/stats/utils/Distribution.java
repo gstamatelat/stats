@@ -243,6 +243,7 @@ public class Distribution {
                 dd.dist.put((limits[i] + limits[i + 1]) / 2, groups[i]);
             }
         }
+        assert this.frequencySum() == dd.frequencySum();
         return dd;
     }
 
