@@ -19,9 +19,15 @@ Quantity correlation measures:
 - Cosine similarity
 - Pearson correlation coefficient
 
+Data binning:
+
+- Linear
+- Logarithmic
+
 Other utilities:
 
 - Distribution
+- Frequency
 
 ## Using
 
