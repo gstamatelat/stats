@@ -1,17 +1,19 @@
 package gr.james.stats.utils;
 
+import gr.james.stats.binning.LinearDataBinning;
+import gr.james.stats.binning.LogarithmicDataBinning;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Random;
 
-public class DistributionTests {
+public class FrequencyTests {
     /**
      * Test the mode.
      */
     @Test
     public void modeTest() {
-        final Distribution d = new Distribution();
+        final Frequency d = new Frequency();
         d.add(1.0);
         d.add(2.0);
         d.add(3.0);
@@ -26,13 +28,13 @@ public class DistributionTests {
     @Test
     public void binning() {
         final Random r = new Random(12345L);
-        final Distribution d = new Distribution();
+        final Frequency d = new Frequency();
         for (int i = 0; i < 1000; i++) {
             d.add(r.nextInt(20) + 1);
         }
-        d.bin(r.nextInt(20) + 5, Distribution.Space.Linear);
-        d.bin(r.nextInt(20) + 5, Distribution.Space.Ln);
-        d.bin(r.nextInt(20) + 5, Distribution.Space.Log2);
-        d.bin(r.nextInt(20) + 5, Distribution.Space.Log10);
+        d.bin(new LinearDataBinning(r.nextInt(20) + 5));
+        d.bin(new LogarithmicDataBinning(r.nextInt(20) + 5, 2));
+        d.bin(new LogarithmicDataBinning(r.nextInt(20) + 5, 10));
+        d.bin(new LogarithmicDataBinning(r.nextInt(20) + 5, Math.exp(1.0)));
     }
 }
