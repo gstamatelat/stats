@@ -17,21 +17,6 @@ public class Frequency {
     public Frequency() {
     }
 
-    @Deprecated
-    public static void main(String[] args) {
-        final Frequency d = new Frequency();
-        for (int i = 1; i < 100; i++) {
-            final long frequency = (long) (10000 * Math.pow(i, -2));
-            for (long f = 0; f < frequency; f++) {
-                d.add(i);
-            }
-        }
-        Plotting.logLog(d.toDistribution(), "LogLog", "X", "Y");
-        Plotting.logLogBins(d.toDistribution(), 25, "LogLogBins", "X", "Y");
-        Plotting.linear(d.toDistribution(), "Linear", "X", "Y");
-        Plotting.linearBins(d.toDistribution(), 25, "LinearBins", "X", "Y");
-    }
-
     /**
      * Convert this {@link Frequency} into a {@link Distribution}.
      *
