@@ -1,5 +1,8 @@
 package gr.james.stats.utils;
 
+import gr.james.stats.binning.DataBin;
+import gr.james.stats.binning.LinearDataBinning;
+import gr.james.stats.binning.LogarithmicDataBinning;
 import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
@@ -190,60 +193,23 @@ public class Distribution {
      * @return a new {@link Distribution} by binning this distribution
      */
     public Distribution bin(int bins, Space space) {
-        final double minKey = dist.firstKey();
-        final double maxKey = dist.lastKey();
-
-        final long[] groups = new long[bins];
-        final double[] limits = new double[bins + 1];
-
+        final List<DataBin<Double, Long>> bb;
         if (space == Space.Linear) {
-            double step = (maxKey - minKey) / bins;
-            for (int i = 0; i <= bins; i++) {
-                limits[i] = minKey + i * step;
-            }
+            bb = new LinearDataBinning(bins).bin(dist);
         } else if (space == Space.Log2) {
-            if (minKey <= 0) {
-                throw new RuntimeException("distribution contains non positive values");
-            }
-            double step = (Math.log(maxKey) / Math.log(2) - Math.log(minKey) / Math.log(2)) / bins;
-            for (int i = 0; i <= bins; i++) {
-                limits[i] = minKey * Math.pow(2, i * step);
-            }
+            bb = new LogarithmicDataBinning(bins, 2).bin(dist);
         } else if (space == Space.Log10) {
-            if (minKey <= 0) {
-                throw new RuntimeException("distribution contains non positive values");
-            }
-            double step = (Math.log10(maxKey) - Math.log10(minKey)) / bins;
-            for (int i = 0; i <= bins; i++) {
-                limits[i] = minKey * Math.pow(10, i * step);
-            }
+            bb = new LogarithmicDataBinning(bins, 10).bin(dist);
         } else if (space == Space.Ln) {
-            if (minKey <= 0) {
-                throw new RuntimeException("distribution contains non positive values");
-            }
-            double step = (Math.log(maxKey) - Math.log(minKey)) / bins;
-            for (int i = 0; i <= bins; i++) {
-                limits[i] = minKey * Math.exp(i * step);
-            }
+            bb = new LogarithmicDataBinning(bins, Math.exp(1.0)).bin(dist);
         } else {
             throw new AssertionError();
         }
 
-        int currentBin = 0;
-        for (Map.Entry<Double, Long> e : dist.entrySet()) {
-            while (e.getKey() > limits[currentBin] && currentBin < bins - 1) {
-                currentBin++;
-            }
-            groups[currentBin] += e.getValue();
-        }
-
         final Distribution dd = new Distribution();
-        for (int i = 0; i < groups.length; i++) {
-            if (groups[i] > 0) {
-                dd.dist.put((limits[i] + limits[i + 1]) / 2, groups[i]);
-            }
+        for (DataBin<Double, Long> b : bb) {
+            dd.dist.put((b.left + b.right) / 2, b.value);
         }
-        assert this.frequencySum() == dd.frequencySum();
         return dd;
     }
 
