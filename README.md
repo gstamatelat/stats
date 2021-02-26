@@ -46,6 +46,6 @@ Using Maven
 Using Gradle
 
 ```gradle
-implementation 'gr.james:stats:0.2' // Runtime
-api            'gr.james:stats:0.2' // Public API
+implementation 'gr.james:stats:0.3' // Runtime
+api            'gr.james:stats:0.3' // Public API
 ```
