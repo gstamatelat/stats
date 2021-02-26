@@ -60,7 +60,7 @@ public class LinearDataBinning implements DataBinning {
             binsList.add(new DataBin<>(groups[i], limits[i], limits[i + 1]));
         }
 
-        assert Math.abs(frequency.values().stream().mapToDouble(Number::doubleValue).sum() - Arrays.stream(groups).sum()) < 1.0 - 4;
+        assert Math.abs(frequency.values().stream().mapToDouble(Number::doubleValue).sum() - Arrays.stream(groups).sum()) < 1.0e-4;
 
         return Collections.unmodifiableList(binsList);
     }
