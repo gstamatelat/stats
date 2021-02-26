@@ -1,6 +1,7 @@
 package gr.james.stats.binning;
 
 import java.util.*;
+import java.util.function.ToDoubleFunction;
 
 /**
  * Logarithmic binning of data.
@@ -68,8 +69,16 @@ public class LogarithmicDataBinning implements DataBinning {
             groups[currentBin] += e.getValue().doubleValue();
         }
 
+        final double originalSum = frequency.values().stream().mapToDouble((ToDoubleFunction<Number>) Number::doubleValue).sum();
+        double sumOfGroups = 0;
         for (int i = 0; i < groups.length; i++) {
-            binsList.add(new DataBin<>(groups[i], limits[i], limits[i + 1]));
+            final double newValue = groups[i] / (limits[i + 1] - limits[i]);
+            sumOfGroups += newValue;
+        }
+        final double ratio = originalSum / sumOfGroups;
+
+        for (int i = 0; i < groups.length; i++) {
+            binsList.add(new DataBin<>(ratio * groups[i] / (limits[i + 1] - limits[i]), limits[i], limits[i + 1]));
         }
 
         return Collections.unmodifiableList(binsList);
