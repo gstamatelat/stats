@@ -46,7 +46,8 @@ public final class Plotting {
      */
     public static void linearBins(Distribution d, int bins, String title, String xLabel, String yLabel) {
         final SortedMap<Double, Double> m = d.map();
-        final List<DataBin<Double, Double>> bb = new LinearDataBinning(bins).bin(m);
+        final List<DataBin<Double, Double>> bb = new LinearDataBinning(bins).bin(m)
+                .stream().filter(b -> b.value > 0).collect(Collectors.toList());
         final List<Double> xData = bb.stream().map(DataBin::center).collect(Collectors.toList());
         final List<Double> yData = bb.stream().map(b -> b.value).collect(Collectors.toList());
         final XYChart chart = new XYChartBuilder().title(title).xAxisTitle(xLabel).yAxisTitle(yLabel).build();
