@@ -111,6 +111,21 @@ public class Frequency {
     }
 
     /**
+     * Return a normalized distribution for which the frequencies sum to 1.
+     *
+     * @return a normalized distribution for which the frequencies sum to 1
+     */
+    public Distribution normalize() {
+        final double sum = (double) sum();
+        final Distribution dd = new Distribution();
+        for (Map.Entry<Double, Long> e : dist.entrySet()) {
+            dd.put(e.getKey(), e.getValue() / sum);
+        }
+        assert Math.abs(dd.sum() - 1.0) < 1e-4;
+        return dd;
+    }
+
+    /**
      * Returns the tail of the distribution that is formed by values greater than {@code value}.
      * <p>
      * More formally, returns a new distribution with values strictly greater than {@code value}.
