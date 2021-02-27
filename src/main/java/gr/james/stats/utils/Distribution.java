@@ -98,7 +98,7 @@ public class Distribution {
         final List<DataBin<Double, Double>> bb = binning.bin(dist);
         final Distribution dd = new Distribution();
         for (DataBin<Double, Double> b : bb) {
-            dd.put(b.center(), b.value);
+            dd.put(b.center, b.value);
         }
         return dd;
     }

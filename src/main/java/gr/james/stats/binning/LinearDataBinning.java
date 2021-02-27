@@ -57,7 +57,12 @@ public class LinearDataBinning implements DataBinning {
         }
 
         for (int i = 0; i < groups.length; i++) {
-            binsList.add(new DataBin<>(groups[i], limits[i], limits[i + 1]));
+            binsList.add(new DataBin<>(
+                    groups[i],
+                    limits[i],
+                    limits[i + 1],
+                    (limits[i] + limits[i + 1]) / 2
+            ));
         }
 
         assert Math.abs(frequency.values().stream().mapToDouble(Number::doubleValue).sum() - Arrays.stream(groups).sum()) < 1.0e-4;

@@ -48,7 +48,7 @@ public final class Plotting {
         final SortedMap<Double, Double> m = d.map();
         final List<DataBin<Double, Double>> bb = new LinearDataBinning(bins).bin(m)
                 .stream().filter(b -> b.value > 0).collect(Collectors.toList());
-        final List<Double> xData = bb.stream().map(DataBin::center).collect(Collectors.toList());
+        final List<Double> xData = bb.stream().map(x -> x.center).collect(Collectors.toList());
         final List<Double> yData = bb.stream().map(b -> b.value).collect(Collectors.toList());
         final XYChart chart = new XYChartBuilder().title(title).xAxisTitle(xLabel).yAxisTitle(yLabel).build();
         chart.addSeries(title, xData, yData).setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);
@@ -88,7 +88,7 @@ public final class Plotting {
         final SortedMap<Double, Double> m = d.map();
         final List<DataBin<Double, Double>> bb = new LogarithmicDataBinning(bins, 10).bin(m)
                 .stream().filter(b -> b.value > 0).collect(Collectors.toList());
-        final List<Double> xData = bb.stream().map(DataBin::center).collect(Collectors.toList());
+        final List<Double> xData = bb.stream().map(x -> x.center).collect(Collectors.toList());
         final List<Double> yData = bb.stream().map(b -> b.value).collect(Collectors.toList());
         final XYChart chart = new XYChartBuilder().title(title).xAxisTitle(xLabel).yAxisTitle(yLabel).build();
         chart.addSeries(title, xData, yData).setXYSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Scatter);

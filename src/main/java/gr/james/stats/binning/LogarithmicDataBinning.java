@@ -78,7 +78,12 @@ public class LogarithmicDataBinning implements DataBinning {
         final double ratio = originalSum / sumOfGroups;
 
         for (int i = 0; i < groups.length; i++) {
-            binsList.add(new DataBin<>(ratio * groups[i] / (limits[i + 1] - limits[i]), limits[i], limits[i + 1]));
+            binsList.add(new DataBin<>(
+                    ratio * groups[i] / (limits[i + 1] - limits[i]),
+                    limits[i],
+                    limits[i + 1],
+                    Math.pow(base, 0.5 * Math.log(limits[i] * limits[i + 1]) / Math.log(base))
+            ));
         }
 
         return Collections.unmodifiableList(binsList);
