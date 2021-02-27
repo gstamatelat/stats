@@ -39,13 +39,13 @@ Using Maven
 <dependency>
   <groupId>gr.james</groupId>
     <artifactId>stats</artifactId>
-    <version>0.7</version>
+    <version>0.8</version>
 </dependency>
 ```
 
 Using Gradle
 
 ```gradle
-implementation 'gr.james:stats:0.7' // Runtime
-api            'gr.james:stats:0.7' // Public API
+implementation 'gr.james:stats:0.8' // Runtime
+api            'gr.james:stats:0.8' // Public API
 ```
