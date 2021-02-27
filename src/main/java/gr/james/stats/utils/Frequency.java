@@ -4,6 +4,7 @@ import gr.james.stats.binning.DataBin;
 import gr.james.stats.binning.DataBinning;
 
 import java.util.*;
+import java.util.function.BiFunction;
 
 /**
  * Represents a distribution of double values into integer frequencies.
@@ -87,11 +88,13 @@ public class Frequency {
     }
 
     /**
-     * Output the distribution in stdout as comma separated x,y values.
+     * Output the distribution in stdout.
+     *
+     * @param format the format of the line
      */
-    public void print() {
+    public void print(BiFunction<Double, Long, String> format) {
         for (Map.Entry<Double, Long> e : dist.entrySet()) {
-            System.out.printf("%f,%d%n", e.getKey(), e.getValue());
+            System.out.print(format.apply(e.getKey(), e.getValue()));
         }
     }
 
