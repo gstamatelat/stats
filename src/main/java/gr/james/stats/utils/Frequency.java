@@ -126,6 +126,21 @@ public class Frequency {
     }
 
     /**
+     * Returns a new distribution by filtering out all elements with zero frequency.
+     *
+     * @return a new distribution by filtering out all elements with zero frequency
+     */
+    public Frequency purge() {
+        final Frequency dd = new Frequency();
+        for (Map.Entry<Double, Long> e : dist.entrySet()) {
+            if (e.getValue() != 0) {
+                dd.dist.put(e.getKey(), e.getValue());
+            }
+        }
+        return dd;
+    }
+
+    /**
      * Returns the tail of the distribution that is formed by values greater than {@code value}.
      * <p>
      * More formally, returns a new distribution with values strictly greater than {@code value}.
