@@ -32,10 +32,10 @@ public class FrequencyTests {
         for (int i = 0; i < 1000; i++) {
             d.add(r.nextInt(20) + 1);
         }
-        d.bin(new LinearDataBinning(r.nextInt(20) + 5));
-        d.bin(new LogarithmicDataBinning(r.nextInt(20) + 5, 2));
-        d.bin(new LogarithmicDataBinning(r.nextInt(20) + 5, 10));
-        d.bin(new LogarithmicDataBinning(r.nextInt(20) + 5, Math.exp(1.0)));
+        d.bin(new LinearDataBinning(r.nextInt(3) + 2));
+        d.bin(new LogarithmicDataBinning(r.nextInt(3) + 2, 2));
+        d.bin(new LogarithmicDataBinning(r.nextInt(3) + 2, 10));
+        d.bin(new LogarithmicDataBinning(r.nextInt(3) + 2, Math.exp(1.0)));
     }
 
     /**
