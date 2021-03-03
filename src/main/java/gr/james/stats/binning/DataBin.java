@@ -43,4 +43,16 @@ public class DataBin<X extends Number, Y> {
         this.right = Objects.requireNonNull(right);
         this.center = Objects.requireNonNull(center);
     }
+
+    /**
+     * Returns a string representation of this object.
+     * <p>
+     * The returned string has the form "center,value".
+     *
+     * @return a string representation of this object
+     */
+    @Override
+    public String toString() {
+        return String.format("%s--%s", center.toString(), value.toString());
+    }
 }
