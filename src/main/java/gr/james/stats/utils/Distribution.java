@@ -32,6 +32,9 @@ public class Distribution {
         if (!Double.isFinite(frequency)) {
             throw new IllegalArgumentException("frequency must be finite");
         }
+        if (frequency <= 0) {
+            throw new IllegalArgumentException("frequency must be positive");
+        }
         this.dist.put(value, frequency);
     }
 
