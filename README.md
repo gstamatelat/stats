@@ -3,6 +3,7 @@
 A collection of statistical measures and utilities in Java 8.
 
 Set theoretic measures:
+
 - Jaccard index
 - Mutual information
 - Overlap coefficient
@@ -28,6 +29,7 @@ Other utilities:
 
 - Distribution
 - Frequency
+- Welford's online algorithm of variance computation
 
 ## Using
 
@@ -37,7 +39,7 @@ Using Maven
 
 ```xml
 <dependency>
-  <groupId>gr.james</groupId>
+    <groupId>gr.james</groupId>
     <artifactId>stats</artifactId>
     <version>0.10</version>
 </dependency>
