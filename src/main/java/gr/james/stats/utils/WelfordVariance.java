@@ -38,6 +38,24 @@ public class WelfordVariance {
     }
 
     /**
+     * Returns the total number of observations that have been added in this instance.
+     *
+     * @return the total number of observations that have been added in this instance
+     */
+    public long observations() {
+        return this.observations;
+    }
+
+    /**
+     * Returns the sum of all observations that have been added in this instance.
+     *
+     * @return the sum of all observations that have been added in this instance
+     */
+    public double sum() {
+        return this.sum;
+    }
+
+    /**
      * Returns the population variance of the observations that have been added to this instance.
      *
      * @return the population variance of the observations that have been added to this instance
