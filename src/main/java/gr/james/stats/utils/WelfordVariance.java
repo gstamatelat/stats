@@ -74,6 +74,28 @@ public class WelfordVariance {
     }
 
     /**
+     * Returns the population standard error.
+     * <p>
+     * The population standard error is the square root of the population variance over the number of observations.
+     *
+     * @return the population standard error
+     */
+    public double populationStandardError() {
+        return Math.sqrt(this.populationVariance() / this.observations());
+    }
+
+    /**
+     * Returns the sample standard error.
+     * <p>
+     * The sample standard error is the square root of the sample variance over the number of observations.
+     *
+     * @return the population standard error
+     */
+    public double sampleStandardError() {
+        return Math.sqrt(this.sampleVariance() / this.observations());
+    }
+
+    /**
      * Returns the mean value of the observations that have been added to this instance.
      *
      * @return the mean value of the observations that have been added to this instance
