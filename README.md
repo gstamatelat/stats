@@ -41,13 +41,13 @@ Using Maven
 <dependency>
     <groupId>gr.james</groupId>
     <artifactId>stats</artifactId>
-    <version>0.12</version>
+    <version>0.13</version>
 </dependency>
 ```
 
 Using Gradle
 
 ```gradle
-implementation 'gr.james:stats:0.12' // Runtime
-api            'gr.james:stats:0.12' // Public API
+implementation 'gr.james:stats:0.13' // Runtime
+api            'gr.james:stats:0.13' // Public API
 ```
