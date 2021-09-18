@@ -89,7 +89,7 @@ public class WelfordVariance {
      * <p>
      * The sample standard error is the square root of the sample variance over the number of observations.
      *
-     * @return the population standard error
+     * @return the sample standard error
      */
     public double sampleStandardError() {
         return Math.sqrt(this.sampleVariance() / this.observations());
